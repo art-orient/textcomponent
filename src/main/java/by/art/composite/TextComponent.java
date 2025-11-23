@@ -1,8 +1,8 @@
 package by.art.composite;
 
 public interface TextComponent {
-  void add(TextComponent textComponent);
-  void remove(TextComponent textComponent);
-  TextLeaf getTextComponentType();
-  String toString();
+  void addChildComponent(TextComponent textComponent);
+  void removeChildComponent(TextComponent textComponent);
+//  TextComponentType getTextLeaf();
+  String restoreText();
 }

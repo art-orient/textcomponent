@@ -1,1 +1,1 @@
-# textcomponent
+This task implements text processing using the Composite design pattern.

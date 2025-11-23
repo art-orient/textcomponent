@@ -1,19 +1,21 @@
 package by.art;
 
-import by.art.composite.TextComposite;
-import by.art.parser.AbstractParser;
-import by.art.parser.ParagraphParser;
-import by.art.parser.SentenceParcer;
-import by.art.parser.SymbolParser;
-import by.art.parser.WordParser;
+import by.art.exception.TextProcessorException;
+import by.art.reader.TextReader;
+import by.art.reader.impl.TextReaderImpl;
 
 public class Main {
-  public static void main(String[] args) {
-    TextComposite textComposite = new TextComposite();
-    ParagraphParser paragraphParser = new ParagraphParser();
-    SentenceParcer sentenceParcer = new SentenceParcer();
-    WordParser wordParser = new WordParser();
-    SymbolParser symbolParser = new SymbolParser();
+  private static final String FILEPATH = "data/text.txt";
+  public static void main(String[] args) throws TextProcessorException {
+    TextReader reader = new TextReaderImpl();
+    String text = reader.readText(FILEPATH);
+    System.out.println(text);
+
+//    TextComposite textComposite = new TextComposite();
+//    ParagraphParser paragraphParser = new ParagraphParser();
+//    SentenceParser sentenceParser = new SentenceParser();
+//    WordParser wordParser = new WordParser();
+//    SymbolParser symbolParser = new SymbolParser();
 
   }
 }
