@@ -3,6 +3,7 @@ package by.art;
 import by.art.composite.TextComponentType;
 import by.art.composite.TextComposite;
 import by.art.exception.TextProcessorException;
+import by.art.parser.LexemeParser;
 import by.art.parser.ParagraphParser;
 import by.art.parser.SentenceParser;
 import by.art.parser.SymbolParser;
@@ -15,12 +16,16 @@ public class Main {
   public static void main(String[] args) throws TextProcessorException {
     TextReader reader = new TextReaderImpl();
     String text = reader.readText(FILEPATH);
-    System.out.println(text);
+    SymbolParser symbolParser = new SymbolParser();
+    WordParser wordParser = new WordParser(symbolParser);
+    LexemeParser lexemeParser = new LexemeParser(wordParser);
+    SentenceParser sentenceParser = new SentenceParser(lexemeParser);
+    ParagraphParser paragraphParser = new ParagraphParser(sentenceParser);
     TextComposite textComposite = new TextComposite(TextComponentType.PARAGRAPH);
-//    ParagraphParser paragraphParser = new ParagraphParser(SentenceParser);
-//    SentenceParser sentenceParser = new SentenceParser();
-//    WordParser wordParser = new WordParser();
-//    SymbolParser symbolParser = new SymbolParser();
+    paragraphParser.parseText(textComposite, text);
+    textComposite.restoreText();
+
+
 
   }
 }
