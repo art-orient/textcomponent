@@ -13,29 +13,24 @@ public class TextComposite implements TextComponent {
   }
 
   @Override
-  public void addChildComponent(TextComponent textComponent) {
+  public void add(TextComponent textComponent) {
     textComponents.add(textComponent);
   }
 
   @Override
-  public void removeChildComponent(TextComponent textComponent) {
+  public void remove(TextComponent textComponent) {
     textComponents.remove(textComponent);
   }
 
-//  @Override
-//  public String receive() {
-//    return null;
-//  }
+  @Override
+  public List<TextComponent> getChildren() {
+    return textComponents;
+  }
 
-//  @Override
-//  public TextComponentType getTextComponentType() {
-//    return textComponentType;
-//  }
-
-//  @Override
-//  public void setTextComponentType(TextComponentType textComponentType) {
-//    this.textComponentType = textComponentType;
-//  }
+  @Override
+  public TextComponentType getComponentType() {
+    return textComponentType;
+  }
 
   @Override
   public String restoreText() {

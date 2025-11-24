@@ -15,7 +15,7 @@ public class SentenceParser extends AbstractBaseParser {
     String[] sentences = text.split(SENTENCE_SEPARATOR);
     for (String sentence : sentences) {
       TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
-      parentComposite.addChildComponent(sentenceComposite);
+      parentComposite.add(sentenceComposite);
       nextParser.parseText(sentenceComposite, sentence);
     }
   }

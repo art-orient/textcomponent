@@ -24,7 +24,7 @@ public class LexemeParser extends AbstractBaseParser {
     }
     for (String lexeme : lexemes) {
       TextComposite lexemeComposite = new TextComposite(TextComponentType.LEXEME);
-      parentComposite.addChildComponent(lexemeComposite);
+      parentComposite.add(lexemeComposite);
       nextParser.parseText(lexemeComposite, lexeme);
     }
   }

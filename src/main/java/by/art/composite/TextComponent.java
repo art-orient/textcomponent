@@ -1,8 +1,11 @@
 package by.art.composite;
 
+import java.util.List;
+
 public interface TextComponent {
-  void addChildComponent(TextComponent textComponent);
-  void removeChildComponent(TextComponent textComponent);
-//  TextComponentType getTextLeaf();
+  List<TextComponent> getChildren();
+  void add(TextComponent textComponent);
+  void remove(TextComponent textComponent);
+  TextComponentType getComponentType();
   String restoreText();
 }

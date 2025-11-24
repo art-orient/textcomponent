@@ -25,7 +25,7 @@ public class WordParser extends AbstractBaseParser {
     }
     for (String word : words) {
       TextComposite wordComposite = new TextComposite(TextComponentType.WORD);
-      parentComposite.addChildComponent(wordComposite);
+      parentComposite.add(wordComposite);
       nextParser.parseText(wordComposite, word);
     }
   }

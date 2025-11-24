@@ -16,7 +16,7 @@ public class ParagraphParser extends AbstractBaseParser {
     String[] paragraphs = text.split(PARAGRAPH_SEPARATOR);
     for (String paragraph : paragraphs) {
       TextComposite paragraphComposite = new TextComposite(TextComponentType.PARAGRAPH);
-      parentComposite.addChildComponent(paragraphComposite);
+      parentComposite.add(paragraphComposite);
       nextParser.parseText(paragraphComposite, paragraph);
     }
   }

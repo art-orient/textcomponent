@@ -3,9 +3,9 @@ package by.art.parser;
 import by.art.composite.TextComponentType;
 import by.art.composite.TextComposite;
 
-public class SymbolParser extends AbstractBaseParser {
+public class LetterParser extends AbstractBaseParser {
 
-  public SymbolParser() {
+  public LetterParser() {
     this.nextParser = null;
   }
 
@@ -16,8 +16,8 @@ public class SymbolParser extends AbstractBaseParser {
       letters[i] = text.charAt(i);
     }
     for (char letter : letters) {
-      TextComposite letterComposite = new TextComposite(TextComponentType.SYMBOL);
-      parentComposite.addChildComponent(letterComposite);
+      TextComposite letterComposite = new TextComposite(TextComponentType.LETTER);
+      parentComposite.add(letterComposite);
     }
   }
 }

@@ -3,10 +3,13 @@ package by.art.composite;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collections;
+import java.util.List;
+
 public class TextLeaf implements TextComponent {
   private static final Logger logger = LogManager.getLogger();
-  private TextComponentType textComponentType;
-  private char leaf;
+  private final TextComponentType textComponentType;
+  private final char leaf;
 
   public TextLeaf(TextComponentType textComponentType, char leaf) {
     this.textComponentType = textComponentType;
@@ -14,31 +17,27 @@ public class TextLeaf implements TextComponent {
   }
 
   @Override
-  public void addChildComponent(TextComponent textComponent) {
-    //TODO
+  public void add(TextComponent textComponent) {
+    throw new UnsupportedOperationException("You can't add component to leaf.");
   }
 
   @Override
-  public void removeChildComponent(TextComponent textComponent) {
-    //TODO
+  public void remove(TextComponent textComponent) {
+    throw new UnsupportedOperationException("You can't remove component from leaf.");
+  }
+
+  @Override
+  public List<TextComponent> getChildren() {
+    return Collections.emptyList();
+  }
+
+  @Override
+  public TextComponentType getComponentType() {
+    return textComponentType;
   }
 
   @Override
   public String restoreText() {
-    return ""; //TODO
+    return String.valueOf(leaf);
   }
-
-//  public getText() {
-//    return leaf;
-//  }
-
-//  @Override
-//  public void add(TextComponentType textComponentType) {
-//
-//  }
-//
-//  @Override
-//  public void remove(TextComponentType textComponentType) {
-//
-//  }
 }
