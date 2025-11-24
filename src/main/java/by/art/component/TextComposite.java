@@ -47,6 +47,6 @@ public class TextComposite implements TextComponent {
         case SENTENCE, LEXEME -> sb.append(SPACE);
       }
     }
-    return sb.toString().stripTrailing();
+    return sb.toString();
   }
 }

@@ -1,7 +1,6 @@
 package by.art;
 
 import by.art.component.TextComponent;
-import by.art.component.TextComposite;
 import by.art.exception.TextProcessorException;
 import by.art.parser.LexemeParser;
 import by.art.parser.ParagraphParser;
