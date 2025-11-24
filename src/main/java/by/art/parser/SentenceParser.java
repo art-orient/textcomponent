@@ -1,22 +1,25 @@
 package by.art.parser;
 
-import by.art.composite.TextComponentType;
-import by.art.composite.TextComposite;
+import by.art.component.TextComponent;
+import by.art.component.TextComponentType;
+import by.art.component.TextComposite;
 
 public class SentenceParser extends AbstractBaseParser {
-  private static final String SENTENCE_SEPARATOR = "(?<=[.!?])\\s+";
+
+  private static final String LEXEME_SEPARATOR = "\\s+";
 
   public SentenceParser(AbstractBaseParser nextParser) {
     this.nextParser = nextParser;
   }
 
   @Override
-  public void parseText(TextComposite parentComposite, String text) {
-    String[] sentences = text.split(SENTENCE_SEPARATOR);
-    for (String sentence : sentences) {
-      TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
-      parentComposite.add(sentenceComposite);
-      nextParser.parseText(sentenceComposite, sentence);
+  public TextComponent parseText(String sentence) {
+    TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
+    String[] lexemes = sentence.split(LEXEME_SEPARATOR);
+    for (String lexeme : lexemes) {
+      TextComponent lexemeComponent = nextParser.parseText(lexeme);
+      sentenceComposite.add(lexemeComponent);
     }
+    return sentenceComposite;
   }
 }

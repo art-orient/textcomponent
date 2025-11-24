@@ -1,13 +1,9 @@
-package by.art.composite;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+package by.art.component;
 
 import java.util.Collections;
 import java.util.List;
 
 public class TextLeaf implements TextComponent {
-  private static final Logger logger = LogManager.getLogger();
   private final TextComponentType textComponentType;
   private final char leaf;
 
@@ -27,7 +23,7 @@ public class TextLeaf implements TextComponent {
   }
 
   @Override
-  public List<TextComponent> getChildren() {
+  public List<TextComponent> getChildrenComponents() {
     return Collections.emptyList();
   }
 

@@ -1,7 +1,9 @@
 package by.art.parser;
 
-import by.art.composite.TextComponentType;
-import by.art.composite.TextComposite;
+import by.art.component.TextComponent;
+import by.art.component.TextComponentType;
+import by.art.component.TextComposite;
+import by.art.component.TextLeaf;
 
 public class LetterParser extends AbstractBaseParser {
 
@@ -10,14 +12,7 @@ public class LetterParser extends AbstractBaseParser {
   }
 
   @Override
-  public void parseText(TextComposite parentComposite, String text) {
-    char[] letters = new char[text.length()];
-    for (int i = 0; i < text.length(); i++) {
-      letters[i] = text.charAt(i);
-    }
-    for (char letter : letters) {
-      TextComposite letterComposite = new TextComposite(TextComponentType.LETTER);
-      parentComposite.add(letterComposite);
-    }
+  public TextComponent parseText(String letter) {
+    return new TextLeaf(TextComponentType.LETTER, letter.charAt(0));
   }
 }

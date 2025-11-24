@@ -1,32 +1,23 @@
 package by.art.parser;
 
-import by.art.composite.TextComponentType;
-import by.art.composite.TextComposite;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import by.art.component.TextComponent;
+import by.art.component.TextComponentType;
+import by.art.component.TextComposite;
+import by.art.component.TextLeaf;
 
 public class WordParser extends AbstractBaseParser {
-  private static final String WORD_REGEX = "\\p{L}+";
 
   public WordParser(AbstractBaseParser nextParser) {
     this.nextParser = nextParser;
   }
 
   @Override
-  public void parseText(TextComposite parentComposite, String text) {
-    Pattern pattern = Pattern.compile(WORD_REGEX);
-    Matcher matcher = pattern.matcher(text);
-    List<String> words = new ArrayList<>();
-    while (matcher.find()) {
-      words.add(matcher.group());
+  public TextComponent parseText(String word) {
+    TextComposite wordComposite = new TextComposite(TextComponentType.WORD);
+    for (char letter: word.toCharArray()) {
+      TextComponent letterComponent = nextParser.parseText(String.valueOf(letter));
+      wordComposite.add(letterComponent);
     }
-    for (String word : words) {
-      TextComposite wordComposite = new TextComposite(TextComponentType.WORD);
-      parentComposite.add(wordComposite);
-      nextParser.parseText(wordComposite, word);
-    }
+    return wordComposite;
   }
 }
