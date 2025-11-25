@@ -1,8 +1,8 @@
-package by.art.parser;
+package by.art.textcomponent.parser;
 
-import by.art.component.TextComponent;
-import by.art.component.TextComponentType;
-import by.art.component.TextComposite;
+import by.art.textcomponent.component.TextComponent;
+import by.art.textcomponent.component.TextComponentType;
+import by.art.textcomponent.component.TextComposite;
 
 public class ParagraphParser extends AbstractBaseParser {
 

@@ -1,7 +1,7 @@
-package by.art.reader.impl;
+package by.art.textcomponent.reader.impl;
 
-import by.art.exception.TextProcessorException;
-import by.art.reader.TextReader;
+import by.art.textcomponent.exception.TextProcessorException;
+import by.art.textcomponent.reader.TextReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

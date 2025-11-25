@@ -1,6 +1,6 @@
-package by.art.service;
+package by.art.textcomponent.service;
 
-import by.art.component.TextComponent;
+import by.art.textcomponent.component.TextComponent;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface TextProcessorService {
 
   List<TextComponent> sortSentencesByNumberLexeme(TextComponent textComponent);
 
-  void swapFirstAndLastLexemes(TextComponent textComponent);
+  TextComponent swapFirstAndLastLexemes(TextComponent textComponent);
 }

@@ -1,6 +1,6 @@
-package by.art.parser;
+package by.art.textcomponent.parser;
 
-import by.art.component.TextComponent;
+import by.art.textcomponent.component.TextComponent;
 
 public abstract class AbstractBaseParser {
   protected AbstractBaseParser nextParser;

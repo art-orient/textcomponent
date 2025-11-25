@@ -1,14 +1,14 @@
-package by.art.component;
+package by.art.textcomponent.component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-  private final List<TextComponent> textComponents = new ArrayList<>();
-  private final TextComponentType textComponentType;
   private static final String TABULATION = "\t";
   private static final String SPACE = " ";
   private static final String LINE_BREAK = "\n";
+  private final List<TextComponent> textComponents = new ArrayList<>();
+  private final TextComponentType textComponentType;
 
   public TextComposite(TextComponentType textComponentType) {
     this.textComponentType = textComponentType;

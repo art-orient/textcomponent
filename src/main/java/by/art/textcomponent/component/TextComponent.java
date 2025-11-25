@@ -1,4 +1,4 @@
-package by.art.component;
+package by.art.textcomponent.component;
 
 import java.util.List;
 

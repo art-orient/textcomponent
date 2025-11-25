@@ -1,7 +1,7 @@
-package by.art.service.impl;
+package by.art.textcomponent.service.impl;
 
-import by.art.component.TextComponent;
-import by.art.service.TextProcessorService;
+import by.art.textcomponent.component.TextComponent;
+import by.art.textcomponent.service.TextProcessorService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class TextProcessorServiceImpl implements TextProcessorService {
   }
 
   @Override
-  public void swapFirstAndLastLexemes(TextComponent textComponent) {
+  public TextComponent swapFirstAndLastLexemes(TextComponent textComponent) {
     //TODO
   }
 }

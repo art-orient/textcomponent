@@ -1,4 +1,4 @@
-package by.art.exception;
+package by.art.textcomponent.exception;
 
 public class TextProcessorException extends Exception {
   public TextProcessorException() {

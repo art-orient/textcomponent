@@ -1,15 +1,15 @@
-package by.art;
+package by.art.textcomponent;
 
-import by.art.component.TextComponent;
-import by.art.exception.TextProcessorException;
-import by.art.parser.LexemeParser;
-import by.art.parser.ParagraphParser;
-import by.art.parser.SentenceParser;
-import by.art.parser.LetterParser;
-import by.art.parser.TextParser;
-import by.art.parser.WordParser;
-import by.art.reader.TextReader;
-import by.art.reader.impl.TextReaderImpl;
+import by.art.textcomponent.component.TextComponent;
+import by.art.textcomponent.exception.TextProcessorException;
+import by.art.textcomponent.parser.LexemeParser;
+import by.art.textcomponent.parser.ParagraphParser;
+import by.art.textcomponent.parser.SentenceParser;
+import by.art.textcomponent.parser.LetterParser;
+import by.art.textcomponent.parser.TextParser;
+import by.art.textcomponent.parser.WordParser;
+import by.art.textcomponent.reader.TextReader;
+import by.art.textcomponent.reader.impl.TextReaderImpl;
 
 public class Main {
   private static final String FILEPATH = "data/text.txt";
