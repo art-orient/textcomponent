@@ -19,7 +19,7 @@ public class LexemeParser extends AbstractBaseParser {
   @Override
   public TextComponent parseText(String lexeme) {
     TextComposite lexemeComposite = new TextComposite(TextComponentType.LEXEME);
-    Pattern pattern = Pattern.compile(WORD_REGEX);
+    Pattern pattern = Pattern.compile(WORD_REGEX); //TODO
     Matcher matcher = pattern.matcher(lexeme);
     List<String> words = new ArrayList<>();
     while (matcher.find()) {

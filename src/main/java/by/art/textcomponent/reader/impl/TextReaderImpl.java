@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,8 +19,7 @@ public class TextReaderImpl implements TextReader {
     String fullText;
     Path path = Paths.get(filepath);
     try {
-      byte[] receivedBytes = Files.readAllBytes(path);
-      fullText = new String(receivedBytes);
+      fullText = Files.readString(path);
       logger.info("File {} was read successfully", filepath);
     } catch (IOException e) {
       logger.error("Failed to read file {}", filepath);

@@ -27,7 +27,7 @@ class TextReaderImplTest {
           are in it.
               Do you need one more?
               I don't think so.
-
+           а здесь русские буквы
               Bye.""";
 
   @BeforeEach
@@ -45,11 +45,11 @@ class TextReaderImplTest {
   void readFileWithMockShouldReturnLinesWhenFileReadSuccessfully() throws TextProcessorException {
     Path path = Path.of(filepath);
     try (var mocked = Mockito.mockStatic(Files.class)) {
-      mocked.when(() -> Files.readAllBytes(path)).thenReturn(expected.getBytes());
+      mocked.when(() -> Files.readString(path)).thenReturn(expected);
       String actual = reader.readText(filepath);
       assertAll(
               () -> assertEquals(expected, actual),
-              () -> mocked.verify(() -> Files.readAllBytes(path))
+              () -> mocked.verify(() -> Files.readString(path))
       );
     }
   }
@@ -59,7 +59,7 @@ class TextReaderImplTest {
   void readNoExistFileWithMockShouldThrowExceptionWhenExceptionOccurs() {
     Path path = Path.of(badFilePath);
     try (var mocked = Mockito.mockStatic(Files.class)) {
-      mocked.when(() -> Files.readAllBytes(path))
+      mocked.when(() -> Files.readString(path))
               .thenThrow(new IOException(String.format("Failed to read file %s", badFilePath)));
       TextProcessorException exception = assertThrows(TextProcessorException.class,
               () -> reader.readText(badFilePath));

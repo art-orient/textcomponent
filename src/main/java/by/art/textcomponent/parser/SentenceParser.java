@@ -6,7 +6,7 @@ import by.art.textcomponent.component.TextComposite;
 
 public class SentenceParser extends AbstractBaseParser {
 
-  private static final String LEXEME_SEPARATOR = "\\s+";
+  private static final String LEXEME_SEPARATOR = "\\s";
 
   public SentenceParser(AbstractBaseParser nextParser) {
     this.nextParser = nextParser;

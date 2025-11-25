@@ -20,11 +20,6 @@ public class TextComposite implements TextComponent {
   }
 
   @Override
-  public void remove(TextComponent textComponent) {
-    textComponents.remove(textComponent);
-  }
-
-  @Override
   public List<TextComponent> getChildrenComponents() {
     return textComponents;
   }
@@ -32,6 +27,11 @@ public class TextComposite implements TextComponent {
   @Override
   public TextComponentType getComponentType() {
     return textComponentType;
+  }
+
+  @Override
+  public int countSymbols() {
+    return 0; //TODO
   }
 
   @Override

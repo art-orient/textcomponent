@@ -18,18 +18,18 @@ public class TextLeaf implements TextComponent {
   }
 
   @Override
-  public void remove(TextComponent textComponent) {
-    throw new UnsupportedOperationException("You can't remove component from leaf.");
-  }
-
-  @Override
   public List<TextComponent> getChildrenComponents() {
-    return Collections.emptyList();
+    throw new UnsupportedOperationException("You can't get components from leaf.");
   }
 
   @Override
   public TextComponentType getComponentType() {
     return textComponentType;
+  }
+
+  @Override
+  public int countSymbols() {
+    return 1;
   }
 
   @Override

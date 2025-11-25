@@ -24,6 +24,8 @@ public class Main {
     TextParser textParser = new TextParser(paragraphParser);
     TextComponent textComponent = textParser.parseText(text);
     String restoredText = textComponent.restoreText();
+
     System.out.println(restoredText);
+    System.out.println(textComponent.countSymbols());
   }
 }
