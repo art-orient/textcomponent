@@ -1,15 +1,19 @@
 package by.art.textcomponent.parser;
 
+import by.art.textcomponent.component.PunctuationLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
 
 public class SentenceParser extends AbstractBaseParser {
 
-  private static final String LEXEME_SEPARATOR = "\\s";
+  private static final String LEXEME_SEPARATOR = "(?<=\\s)|(?=\\s)";
+  private static final String SPACE = " ";
+  private static final String TAB = "\t";
+  private static final String LINE_BREAK = "\n";
 
   public SentenceParser(AbstractBaseParser nextParser) {
-    this.nextParser = nextParser;
+    setNextParser(nextParser);
   }
 
   @Override
@@ -17,8 +21,14 @@ public class SentenceParser extends AbstractBaseParser {
     TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
     String[] lexemes = sentence.split(LEXEME_SEPARATOR);
     for (String lexeme : lexemes) {
-      TextComponent lexemeComponent = nextParser.parseText(lexeme);
-      sentenceComposite.add(lexemeComponent);
+      switch (lexeme) {
+        case SPACE -> sentenceComposite.add(new PunctuationLeaf(SPACE.charAt(0)));
+        case TAB -> sentenceComposite.add(new PunctuationLeaf(TAB.charAt(0)));
+        case LINE_BREAK -> sentenceComposite.add(new PunctuationLeaf(LINE_BREAK.charAt(0)));
+        default -> { TextComponent lexemeComponent = getNextParser().parseText(lexeme);
+                      sentenceComposite.add(lexemeComponent);
+        }
+      }
     }
     return sentenceComposite;
   }

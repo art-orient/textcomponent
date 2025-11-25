@@ -5,8 +5,8 @@ import java.util.List;
 
 public class TextComposite implements TextComponent {
   private static final String TABULATION = "\t";
-  private static final String SPACE = " ";
   private static final String LINE_BREAK = "\n";
+  private static final String SPACE = " ";
   private final List<TextComponent> textComponents = new ArrayList<>();
   private final TextComponentType textComponentType;
 
@@ -42,14 +42,7 @@ public class TextComposite implements TextComponent {
   public String restoreText() {
     StringBuilder sb = new StringBuilder();
     for (TextComponent textComponent : textComponents) {
-      if (getComponentType() == TextComponentType.PARAGRAPH) {
-        sb.append(TABULATION);
-      }
       sb.append(textComponent.restoreText());
-      switch (getComponentType()) {
-        case PARAGRAPH -> sb.append(LINE_BREAK);
-        case SENTENCE, LEXEME -> sb.append(SPACE);
-      }
     }
     return sb.toString();
   }

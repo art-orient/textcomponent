@@ -12,7 +12,7 @@ public class ParagraphParser extends AbstractBaseParser {
   private static final String SENTENCE_REGEX = "([^.!?]+)([.!?])(?=\\s|$)";
 
   public ParagraphParser(AbstractBaseParser nextParser) {
-    this.nextParser = nextParser;
+    setNextParser(nextParser);
   }
 
   @Override
@@ -22,7 +22,7 @@ public class ParagraphParser extends AbstractBaseParser {
     Matcher matcher = pattern.matcher(paragraph);
     while (matcher.find()) {
       String sentence = matcher.group().strip();
-      TextComponent sentenceComponent = nextParser.parseText(sentence);
+      TextComponent sentenceComponent = getNextParser().parseText(sentence);
       paragraphComposite.add(sentenceComponent);
     }
     return paragraphComposite;
