@@ -1,14 +1,13 @@
 package by.art.textcomponent.component;
 
-import java.util.Collections;
 import java.util.List;
 
-public class TextLeaf implements TextComponent {
+public class LetterLeaf implements TextComponent {
   private final TextComponentType textComponentType;
   private final char leaf;
 
-  public TextLeaf(TextComponentType textComponentType, char leaf) {
-    this.textComponentType = textComponentType;
+  public LetterLeaf(char leaf) {
+    this.textComponentType = TextComponentType.LETTER;
     this.leaf = leaf;
   }
 

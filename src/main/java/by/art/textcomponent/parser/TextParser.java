@@ -5,7 +5,7 @@ import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
 
 public class TextParser extends AbstractBaseParser {
-  private static final String PARAGRAPH_SEPARATOR = "(?=\\t)";
+  private static final String PARAGRAPH_SEPARATOR = "(?=\\t| {4})";
 
   public TextParser(AbstractBaseParser nextParser) {
     this.nextParser = nextParser;
