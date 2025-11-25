@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextComposite implements TextComponent {
-  private static final String TABULATION = "\t";
-  private static final String LINE_BREAK = "\n";
-  private static final String SPACE = " ";
   private final List<TextComponent> textComponents = new ArrayList<>();
   private final TextComponentType textComponentType;
 
