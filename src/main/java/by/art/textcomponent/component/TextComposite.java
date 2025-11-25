@@ -31,7 +31,11 @@ public class TextComposite implements TextComponent {
 
   @Override
   public int countSymbols() {
-    return 0; //TODO
+    int counter = 0;
+    for (TextComponent textComponent : textComponents) {
+      counter += textComponent.countSymbols();
+    }
+    return counter;
   }
 
   @Override
