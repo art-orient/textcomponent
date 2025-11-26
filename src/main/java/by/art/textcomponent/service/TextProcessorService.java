@@ -8,7 +8,7 @@ public interface TextProcessorService {
 
   int findMaxNumberOfSentencesWithTheSameWord(TextComponent textComponent);
 
-  List<TextComponent> sortSentencesByNumberLexeme(TextComponent textComponent);
+  List<String> sortSentencesByNumberLexeme(TextComponent textComponent);
 
   TextComponent swapFirstAndLastLexemes(TextComponent textComponent);
 }

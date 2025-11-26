@@ -22,19 +22,17 @@ public class ParagraphParser extends AbstractBaseParser {
     Matcher matcher = pattern.matcher(paragraph);
     int indexOfEndOfLastSentence = 0;
     while (matcher.find()) {
-      String sentenceText = matcher.group(1);
-      char endPunctuation = matcher.group(2).charAt(0);
+      String sentenceText = matcher.group();
       if (!sentenceText.isEmpty()) {
         TextComponent sentenceComponent = getNextParser().parseText(sentenceText);
         paragraphComposite.add(sentenceComponent);
       }
-      paragraphComposite.add(new PunctuationLeaf(endPunctuation));
       indexOfEndOfLastSentence = matcher.end();
     }
     if (indexOfEndOfLastSentence < paragraph.length()) {
-      String tail = paragraph.substring(indexOfEndOfLastSentence);
-      if (!tail.isEmpty()) {
-        TextComponent sentenceComponent = getNextParser().parseText(tail);
+      String lineBreak = paragraph.substring(indexOfEndOfLastSentence);
+      if (!lineBreak.isEmpty()) {
+        TextComponent sentenceComponent = new PunctuationLeaf(lineBreak.charAt(0));
         paragraphComposite.add(sentenceComponent);
       }
     }
