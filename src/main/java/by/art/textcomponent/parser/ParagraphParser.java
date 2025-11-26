@@ -20,19 +20,19 @@ public class ParagraphParser extends AbstractBaseParser {
     TextComposite paragraphComposite = new TextComposite(TextComponentType.PARAGRAPH);
     Pattern pattern = Pattern.compile(SENTENCE_REGEX, Pattern.DOTALL);
     Matcher matcher = pattern.matcher(paragraph);
-    int lastEnd = 0;
+    int indexOfEndOfLastSentence = 0;
     while (matcher.find()) {
       String sentenceText = matcher.group(1);
-      char terminator = matcher.group(2).charAt(0);
+      char endPunctuation = matcher.group(2).charAt(0);
       if (!sentenceText.isEmpty()) {
         TextComponent sentenceComponent = getNextParser().parseText(sentenceText);
         paragraphComposite.add(sentenceComponent);
       }
-      paragraphComposite.add(new PunctuationLeaf(terminator));
-      lastEnd = matcher.end();
+      paragraphComposite.add(new PunctuationLeaf(endPunctuation));
+      indexOfEndOfLastSentence = matcher.end();
     }
-    if (lastEnd < paragraph.length()) {
-      String tail = paragraph.substring(lastEnd);
+    if (indexOfEndOfLastSentence < paragraph.length()) {
+      String tail = paragraph.substring(indexOfEndOfLastSentence);
       if (!tail.isEmpty()) {
         TextComponent sentenceComponent = getNextParser().parseText(tail);
         paragraphComposite.add(sentenceComponent);
