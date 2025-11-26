@@ -37,5 +37,7 @@ public class Main {
     for (String sentence : sortedSentences) {
       System.out.println(sentence);
     }
+
+    System.out.println(service.findMaxNumberOfSentencesWithTheSameWord(textComponent));
   }
 }
