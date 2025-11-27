@@ -3,8 +3,11 @@ package by.art.textcomponent.parser;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TextParser extends AbstractBaseParser {
+  private static final Logger logger = LogManager.getLogger();
   private static final String PARAGRAPH_REGEX = "(?=(\\t| {4}))";
 
   public TextParser(AbstractBaseParser nextParser) {
@@ -19,6 +22,7 @@ public class TextParser extends AbstractBaseParser {
       TextComponent component = getNextParser().parseText(paragraph);
       textComposite.add(component);
     }
+    logger.info("{} paragraphs found", paragraphs.length);
     return textComposite;
   }
 }

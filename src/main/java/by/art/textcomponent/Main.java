@@ -31,13 +31,15 @@ public class Main {
 
     System.out.println(restoredText);
     System.out.println(textComponent.countSymbols());
-
     TextProcessorService service = new TextProcessorServiceImpl();
     List<String> sortedSentences = service.sortSentencesByNumberLexeme(textComponent);
     for (String sentence : sortedSentences) {
       System.out.println(sentence);
     }
-
     System.out.println(service.findMaxNumberOfSentencesWithTheSameWord(textComponent));
+    List<String> swappedLexemes = service.swapFirstAndLastLexemes(textComponent);
+    for (String sentence : swappedLexemes) {
+      System.out.println(sentence);
+    }
   }
 }

@@ -8,7 +8,8 @@
 
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%r %-5level %logger{3} - %msg%n"/>
+            <PatternLayout pattern="%highlight{%r %-level %logger{3} - %msg%n}{FATAL=red bold, ERROR=red, WARN=yellow,
+            INFO=green, DEBUG=blue, TRACE=cyan}"/>
         </Console>
 
         <RollingFile name="FileRolling" filename="${LOG_DIR}/text_log.log" append="true"
