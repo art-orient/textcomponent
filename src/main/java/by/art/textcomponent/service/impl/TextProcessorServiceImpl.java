@@ -19,7 +19,7 @@ public class TextProcessorServiceImpl implements TextProcessorService {
 
   @Override
   public int findMaxNumberOfSentencesWithTheSameWord(TextComponent text) {
-    Map<String, Set<Integer>> wordToSentences = new HashMap<>();
+    Map<String, Set<Integer>> wordInAllSentences = new HashMap<>();
     int sentenceIndex = 0;
     for (TextComponent paragraph : text.getChildrenComponents()) {
       if (paragraph.getComponentType() != TextComponentType.PARAGRAPH) {
@@ -30,19 +30,14 @@ public class TextProcessorServiceImpl implements TextProcessorService {
           continue;
         }
         Set<String> wordsInSentence = extractWords(sentence);
-        for (String word : wordsInSentence) {
-          wordToSentences
-                  .computeIfAbsent(word, k -> new HashSet<>())
-                  .add(sentenceIndex);
-        }
+        updateWordMap(wordInAllSentences, wordsInSentence, sentenceIndex);
         sentenceIndex++;
       }
     }
-    int maxCount = 0;
-    for (Set<Integer> sentenceSet : wordToSentences.values()) {
-      maxCount = Math.max(maxCount, sentenceSet.size());
-    }
-    return maxCount;
+    return wordInAllSentences.values().stream()
+            .mapToInt(Set::size)
+            .max()
+            .orElse(0);
   }
 
   @Override
@@ -53,9 +48,8 @@ public class TextProcessorServiceImpl implements TextProcessorService {
             .sorted(Comparator.comparingInt(s -> (int) s.getChildrenComponents().stream()
                             .filter(c -> c.getComponentType() == TextComponentType.LEXEME)
                             .count()))
-            .map(TextComponent :: restoreText)
+            .map(TextComponent::restoreText)
             .map(s -> s.replace(LINE_BREAK, SPACE))
-            .map(String::strip)
             .toList();
   }
 
@@ -90,5 +84,13 @@ public class TextProcessorServiceImpl implements TextProcessorService {
       }
     }
     return wordsInSentence;
+  }
+
+  private void updateWordMap(Map<String, Set<Integer>> wordInAllSentences, Set<String> wordsInSentence,
+                             int sentenceIndex) {
+    for (String word : wordsInSentence) {
+      wordInAllSentences.computeIfAbsent(word, key -> new HashSet<>())
+              .add(sentenceIndex);
+    }
   }
 }
