@@ -20,6 +20,9 @@ public class SentenceParser extends AbstractBaseParser {
   @Override
   public TextComponent parseText(String sentence) {
     TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
+    if (sentence == null || sentence.isEmpty()) {
+      return sentenceComposite;
+    }
     String[] lexemes = sentence.split(LEXEME_SEPARATOR);
     logger.debug("The sentence is broken down into {} lexemes", lexemes.length);
     for (String lexeme : lexemes) {

@@ -1,4 +1,4 @@
-package by.art.reader.impl;
+package by.art.textcomponent.reader.impl;
 
 import by.art.textcomponent.exception.TextProcessorException;
 import by.art.textcomponent.reader.TextReader;
