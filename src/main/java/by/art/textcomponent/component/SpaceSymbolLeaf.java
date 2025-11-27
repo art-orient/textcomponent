@@ -12,7 +12,7 @@ public class SpaceSymbolLeaf implements TextComponent {
 
 
   public SpaceSymbolLeaf(char leaf) {
-    this.textComponentType = TextComponentType.PUNCTUATION;
+    this.textComponentType = TextComponentType.SPACE;
     this.leaf = leaf;
   }
 
@@ -35,7 +35,7 @@ public class SpaceSymbolLeaf implements TextComponent {
 
   @Override
   public int countSymbols() {
-    return 0;
+    return 1;
   }
 
   @Override

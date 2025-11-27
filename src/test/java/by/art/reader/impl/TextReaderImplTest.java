@@ -1,7 +1,8 @@
-package by.art.textcomponent.reader.impl;
+package by.art.reader.impl;
 
 import by.art.textcomponent.exception.TextProcessorException;
 import by.art.textcomponent.reader.TextReader;
+import by.art.textcomponent.reader.impl.TextReaderImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
