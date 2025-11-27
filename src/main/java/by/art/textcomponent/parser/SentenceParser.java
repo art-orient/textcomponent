@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.PunctuationLeaf;
+import by.art.textcomponent.component.SpaceSymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -22,9 +22,9 @@ public class SentenceParser extends AbstractBaseParser {
     String[] lexemes = sentence.split(LEXEME_SEPARATOR);
     for (String lexeme : lexemes) {
       switch (lexeme) {
-        case SPACE -> sentenceComposite.add(new PunctuationLeaf(SPACE.charAt(0)));
-        case TAB -> sentenceComposite.add(new PunctuationLeaf(TAB.charAt(0)));
-        case LINE_BREAK -> sentenceComposite.add(new PunctuationLeaf(LINE_BREAK.charAt(0)));
+        case SPACE -> sentenceComposite.add(new SpaceSymbolLeaf(SPACE.charAt(0)));
+        case TAB -> sentenceComposite.add(new SpaceSymbolLeaf(TAB.charAt(0)));
+        case LINE_BREAK -> sentenceComposite.add(new SpaceSymbolLeaf(LINE_BREAK.charAt(0)));
         default -> { TextComponent lexemeComponent = getNextParser().parseText(lexeme);
                       sentenceComposite.add(lexemeComponent);
         }
