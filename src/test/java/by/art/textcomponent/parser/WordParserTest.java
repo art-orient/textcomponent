@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.LetterLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import org.junit.jupiter.api.Tag;
@@ -18,8 +18,12 @@ class WordParserTest {
     assertAll(
             () -> assertEquals(TextComponentType.WORD, result.getComponentType()),
             () -> assertEquals(2, result.getChildrenComponents().size()),
-            () -> assertTrue(result.getChildrenComponents().get(0) instanceof LetterLeaf),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof LetterLeaf),
+            () -> assertTrue(result.getChildrenComponents().get(0) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.LETTER,
+                    result.getChildrenComponents().get(0).getComponentType()),
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.LETTER,
+                    result.getChildrenComponents().get(1).getComponentType()),
             () -> assertEquals("Hi", result.restoreText()),
             () -> assertEquals(2, result.countSymbols())
     );

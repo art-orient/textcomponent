@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.SpaceSymbolLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -20,15 +20,12 @@ public class SentenceParser extends AbstractBaseParser {
   @Override
   public TextComponent parseText(String sentence) {
     TextComposite sentenceComposite = new TextComposite(TextComponentType.SENTENCE);
-    if (sentence == null || sentence.isEmpty()) {
-      return sentenceComposite;
-    }
     String[] lexemes = sentence.split(LEXEME_SEPARATOR);
     logger.debug("The sentence is broken down into {} lexemes", lexemes.length);
     for (String lexeme : lexemes) {
       switch (lexeme) {
-        case SPACE -> sentenceComposite.add(new SpaceSymbolLeaf(SPACE.charAt(0)));
-        case LINE_BREAK -> sentenceComposite.add(new SpaceSymbolLeaf(LINE_BREAK.charAt(0)));
+        case SPACE -> sentenceComposite.add(new SymbolLeaf(TextComponentType.SPACE, SPACE.charAt(0)));
+        case LINE_BREAK -> sentenceComposite.add(new SymbolLeaf(TextComponentType.SPACE, LINE_BREAK.charAt(0)));
         default -> {
           TextComponent lexemeComponent = getNextParser().parseText(lexeme);
           sentenceComposite.add(lexemeComponent);

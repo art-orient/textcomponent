@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.SpaceSymbolLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -29,7 +29,11 @@ class SentenceParserTest {
     assertAll(
             () -> assertEquals(TextComponentType.SENTENCE, result.getComponentType()),
             () -> assertEquals(3, result.getChildrenComponents().size()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SpaceSymbolLeaf)
+            () -> assertEquals(TextComponentType.LEXEME,
+                    result.getChildrenComponents().get(0).getComponentType()),
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.SPACE,
+                    result.getChildrenComponents().get(1).getComponentType())
     );
   }
 
@@ -39,7 +43,9 @@ class SentenceParserTest {
     TextComponent result = parser.parseText("Hello\nworld");
     assertAll(
             () -> assertEquals(3, result.getChildrenComponents().size()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SpaceSymbolLeaf),
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.SPACE,
+                    result.getChildrenComponents().get(1).getComponentType()),
             () -> assertEquals("\n", result.getChildrenComponents().get(1).restoreText())
     );
   }
@@ -49,15 +55,5 @@ class SentenceParserTest {
   void testDelegatesToNextParser() {
     parser.parseText(hello);
     Mockito.verify(nextParser, Mockito.times(2)).parseText(Mockito.anyString());
-  }
-
-  @Test
-  @Tag("parser")
-  void testEmptySentence() {
-    TextComponent result = parser.parseText("");
-    assertAll(
-            () -> assertEquals(TextComponentType.SENTENCE, result.getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().isEmpty())
-    );
   }
 }

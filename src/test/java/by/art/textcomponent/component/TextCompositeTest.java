@@ -11,7 +11,7 @@ class TextCompositeTest {
   @Tag("component")
   void testAddAndGetChildren() {
     TextComposite composite = new TextComposite(TextComponentType.SENTENCE);
-    LetterLeaf leaf = new LetterLeaf('a');
+    SymbolLeaf leaf = new SymbolLeaf(TextComponentType.LETTER, 'a');
     composite.add(leaf);
     assertAll (
             () -> assertEquals(1, composite.getChildrenComponents().size()),
@@ -30,9 +30,9 @@ class TextCompositeTest {
   @Tag("component")
   void testCountSymbols() {
     TextComposite composite = new TextComposite(TextComponentType.WORD);
-    composite.add(new LetterLeaf('a'));
-    composite.add(new LetterLeaf('b'));
-    composite.add(new LetterLeaf('c'));
+    composite.add(new SymbolLeaf(TextComponentType.LETTER, 'a'));
+    composite.add(new SymbolLeaf(TextComponentType.LETTER, 'b'));
+    composite.add(new SymbolLeaf(TextComponentType.LETTER, 'c'));
     assertEquals(3, composite.countSymbols());
   }
 
@@ -40,9 +40,9 @@ class TextCompositeTest {
   @Tag("component")
   void testRestoreText() {
     TextComposite composite = new TextComposite(TextComponentType.WORD);
-    composite.add(new LetterLeaf('h'));
-    composite.add(new LetterLeaf('i'));
-    composite.add(new PunctuationLeaf('!'));
+    composite.add(new SymbolLeaf(TextComponentType.LETTER, 'h'));
+    composite.add(new SymbolLeaf(TextComponentType.LETTER, 'i'));
+    composite.add(new SymbolLeaf(TextComponentType.PUNCTUATION, '!'));
     assertEquals("hi!", composite.restoreText());
   }
 }

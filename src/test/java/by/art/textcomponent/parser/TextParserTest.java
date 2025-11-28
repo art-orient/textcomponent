@@ -28,18 +28,6 @@ class TextParserTest {
 
   @Test
   @Tag("parser")
-  void testParseEmptyText() {
-    Mockito.when(nextParser.parseText(Mockito.anyString()))
-            .thenReturn(new TextComposite(TextComponentType.PARAGRAPH));
-    TextComponent result = parser.parseText("");
-    assertAll(
-            () -> assertEquals(TextComponentType.TEXT, result.getComponentType()),
-            () -> assertEquals(0, result.getChildrenComponents().size())
-    );
-  }
-
-  @Test
-  @Tag("parser")
   void testDelegatesToNextParser() {
     parser.parseText(text);
     Mockito.verify(nextParser, Mockito.times(2)).parseText(Mockito.anyString());

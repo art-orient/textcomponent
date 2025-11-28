@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.PunctuationLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -25,15 +25,16 @@ public class LexemeParser extends AbstractBaseParser {
     Pattern pattern = Pattern.compile(WORD_AND_PUNCTUATION_REGEX);
     Matcher matcher = pattern.matcher(lexeme);
     while (matcher.find()) {
-      String token = matcher.group();
-      if (token.matches(WORD_REGEX)) {
-        TextComponent wordComponent = getNextParser().parseText(token);
+      String wordOrPunctuation = matcher.group();
+      if (wordOrPunctuation.matches(WORD_REGEX)) {
+        TextComponent wordComponent = getNextParser().parseText(wordOrPunctuation);
         lexemeComposite.add(wordComponent);
         logger.atTrace().log("Word found - {}", wordComponent.restoreText());
       } else {
-        TextComponent punctuationComponent = new PunctuationLeaf(token.charAt(0));
+        TextComponent punctuationComponent = new SymbolLeaf(TextComponentType.PUNCTUATION,
+                wordOrPunctuation.charAt(0));
         lexemeComposite.add(punctuationComponent);
-        logger.atTrace().log("Punctuation found - {}", punctuationComponent.restoreText());
+        logger.atTrace().log("Punctuation found - {}", wordOrPunctuation);
       }
     }
     return lexemeComposite;

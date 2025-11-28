@@ -1,20 +1,15 @@
 package by.art.textcomponent.service.impl;
 
-import by.art.textcomponent.component.LetterLeaf;
-import by.art.textcomponent.component.SpaceSymbolLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
 import by.art.textcomponent.exception.TextProcessorException;
-import by.art.textcomponent.service.TextProcessorService;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
-
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TextProcessorServiceImplTest {
@@ -28,10 +23,12 @@ class TextProcessorServiceImplTest {
   @Tag("service")
   void testFindMaxNumberOfSentencesWithTheSameWordSimple(String sentence1, String sentence2, int expected)
           throws TextProcessorException {
+    String[] words1 = sentence1.split(" ");
+    String[] words2 = sentence2.split(" ");
     TextComposite text = new TextComposite(TextComponentType.TEXT);
     TextComposite paragraph = new TextComposite(TextComponentType.PARAGRAPH);
-    paragraph.add(buildSentence(sentence1.split(" ")));
-    paragraph.add(buildSentence(sentence2.split(" ")));
+    paragraph.add(buildSentence(words1));
+    paragraph.add(buildSentence(words2));
     text.add(paragraph);
     int result = service.findMaxNumberOfSentencesWithTheSameWord(text);
     assertEquals(expected, result);
@@ -51,15 +48,13 @@ class TextProcessorServiceImplTest {
   })
   @Tag("service")
   void testSortSentencesByNumberLexeme(String sentencesRaw, String expectedOrder) throws TextProcessorException {
-    String[][] sentences =
-            java.util.Arrays.stream(sentencesRaw.split(";"))
-                    .map(s -> s.split(" "))
-                    .toArray(String[][]::new);
-
+    String[] rawSentences = sentencesRaw.split(";");
+    String[][] sentences = new String[rawSentences.length][];
+    for (int i = 0; i < rawSentences.length; i++) {
+      sentences[i] = rawSentences[i].split(" ");
+    }
     TextComponent text = buildText(sentences);
-
     List<String> sorted = service.sortSentencesByNumberLexeme(text);
-
     assertEquals(java.util.Arrays.asList(expectedOrder.split(",")), sorted);
   }
 
@@ -96,12 +91,12 @@ class TextProcessorServiceImplTest {
       TextComposite lexeme = new TextComposite(TextComponentType.LEXEME);
       TextComposite wordComposite = new TextComposite(TextComponentType.WORD);
       for (char symbol : words[i].toCharArray()) {
-        wordComposite.add(new LetterLeaf(symbol));
+        wordComposite.add(new SymbolLeaf(TextComponentType.LETTER, symbol));
       }
       lexeme.add(wordComposite);
       sentence.add(lexeme);
       if (i < words.length - 1) {
-        sentence.add(new SpaceSymbolLeaf(' '));
+        sentence.add(new SymbolLeaf(TextComponentType.SPACE, ' '));
       }
     }
     return sentence;

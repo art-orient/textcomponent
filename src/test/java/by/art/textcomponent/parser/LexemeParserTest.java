@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.PunctuationLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -29,7 +29,9 @@ class LexemeParserTest {
             () -> assertEquals(TextComponentType.LEXEME, result.getComponentType()),
             () -> assertEquals(2, result.getChildrenComponents().size()),
             () -> assertEquals(TextComponentType.WORD, result.getChildrenComponents().get(0).getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof PunctuationLeaf)
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.PUNCTUATION,
+                    result.getChildrenComponents().get(1).getComponentType())
     );
   }
 
@@ -40,7 +42,9 @@ class LexemeParserTest {
     assertAll(
             () -> assertEquals(2, result.getChildrenComponents().size()),
             () -> assertEquals(TextComponentType.WORD, result.getChildrenComponents().get(0).getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof PunctuationLeaf)
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.PUNCTUATION,
+                    result.getChildrenComponents().get(1).getComponentType())
     );
   }
 
@@ -51,9 +55,13 @@ class LexemeParserTest {
     assertAll(
             () -> assertEquals(4, result.getChildrenComponents().size()),
             () -> assertEquals(TextComponentType.WORD, result.getChildrenComponents().get(0).getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof PunctuationLeaf),
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.PUNCTUATION,
+                    result.getChildrenComponents().get(1).getComponentType()),
             () -> assertEquals(TextComponentType.WORD, result.getChildrenComponents().get(2).getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().get(3) instanceof PunctuationLeaf)
+            () -> assertTrue(result.getChildrenComponents().get(3) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.PUNCTUATION,
+                    result.getChildrenComponents().get(3).getComponentType())
     );
   }
 

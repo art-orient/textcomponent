@@ -5,14 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpaceSymbolLeafTest {
-  char space = ' ';
-  SpaceSymbolLeaf leaf = new SpaceSymbolLeaf(space);
+class SymbolLeafTest {
+  char symbolA = 'a';
+  SymbolLeaf leaf = new SymbolLeaf(TextComponentType.LETTER, symbolA);
 
   @Test
   @Tag("component")
   void testRestoreText() {
-    assertEquals(String.valueOf(space), leaf.restoreText());
+    assertEquals(String.valueOf(symbolA), leaf.restoreText());
   }
 
   @Test
@@ -23,8 +23,15 @@ class SpaceSymbolLeafTest {
 
   @Test
   @Tag("component")
+  void testCountSpaceSymbols() {
+    SymbolLeaf space = new SymbolLeaf(TextComponentType.SPACE, ' ');
+    assertEquals(0, space.countSymbols());
+  }
+
+  @Test
+  @Tag("component")
   void testGetComponentType() {
-    assertEquals(TextComponentType.SPACE, leaf.getComponentType());
+    assertEquals(TextComponentType.LETTER, leaf.getComponentType());
   }
 
   @Test
@@ -37,4 +44,5 @@ class SpaceSymbolLeafTest {
   @Tag("component")
   void testGetChildrenComponentsThrowsException() {
     assertThrows(UnsupportedOperationException.class, leaf::getChildrenComponents);
-  }}
+  }
+}

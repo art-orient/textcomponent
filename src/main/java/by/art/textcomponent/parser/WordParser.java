@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.LetterLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -14,7 +14,7 @@ public class WordParser extends AbstractBaseParser {
   public TextComponent parseText(String word) {
     TextComposite wordComposite = new TextComposite(TextComponentType.WORD);
     for (char letter: word.toCharArray()) {
-      TextComponent letterComponent = new LetterLeaf(letter);
+      TextComponent letterComponent = new SymbolLeaf(TextComponentType.LETTER, letter);
       wordComposite.add(letterComponent);
       logger.trace("Letter added: '{}'", letter);
     }

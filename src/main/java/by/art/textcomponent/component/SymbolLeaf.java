@@ -5,26 +5,25 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class SpaceSymbolLeaf implements TextComponent {
+public class SymbolLeaf implements TextComponent {
   private static final Logger logger = LogManager.getLogger();
   private final TextComponentType textComponentType;
   private final char leaf;
 
-
-  public SpaceSymbolLeaf(char leaf) {
-    this.textComponentType = TextComponentType.SPACE;
+  public SymbolLeaf(TextComponentType textComponentType, char leaf) {
+    this.textComponentType = textComponentType;
     this.leaf = leaf;
   }
 
   @Override
   public void add(TextComponent textComponent) {
-    logger.error("Attempt to add component to space symbol leaf");
+    logger.error("Attempt to add component to leaf");
     throw new UnsupportedOperationException("You can't add component to leaf.");
   }
 
   @Override
   public List<TextComponent> getChildrenComponents() {
-    logger.error("Attempt to get children components from space symbol leaf");
+    logger.error("Attempt to get children components from leaf");
     throw new UnsupportedOperationException("You can't get components from leaf.");
   }
 
@@ -35,7 +34,7 @@ public class SpaceSymbolLeaf implements TextComponent {
 
   @Override
   public int countSymbols() {
-    return 1;
+    return getComponentType() == TextComponentType.SPACE ? 0 : 1;
   }
 
   @Override

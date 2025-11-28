@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.SpaceSymbolLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponent;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
@@ -25,11 +25,11 @@ public class ParagraphParser extends AbstractBaseParser {
   public TextComposite parseText(String paragraph) {
     TextComposite paragraphComposite = new TextComposite(TextComponentType.PARAGRAPH);
     if (paragraph.startsWith(TAB)) {
-      paragraphComposite.add(new SpaceSymbolLeaf(TAB.charAt(0)));
+      paragraphComposite.add(new SymbolLeaf(TextComponentType.SPACE, TAB.charAt(0)));
       paragraph = paragraph.substring(1);
     } else if (paragraph.startsWith(FOUR_SPACES)) {
       for (int i = 0; i < 4; i++) {
-        paragraphComposite.add(new SpaceSymbolLeaf(' '));
+        paragraphComposite.add(new SymbolLeaf(TextComponentType.SPACE, ' '));
       }
       paragraph = paragraph.substring(4);
     }
@@ -40,13 +40,13 @@ public class ParagraphParser extends AbstractBaseParser {
     while (matcher.find()) {
       String sentenceText = matcher.group(1);
       String spaceBetweenSentences = matcher.group(2);
-      if (!sentenceText.isEmpty()) {
+      if (!sentenceText.isBlank()) {
         TextComponent sentenceComponent = getNextParser().parseText(sentenceText);
         paragraphComposite.add(sentenceComponent);
         logger.debug("Sentence found: '{}'", sentenceText);
       }
       if (!spaceBetweenSentences.isEmpty()) {
-        paragraphComposite.add(new SpaceSymbolLeaf(SPACE.charAt(0)));
+        paragraphComposite.add(new SymbolLeaf(TextComponentType.SPACE, SPACE.charAt(0)));
         logger.debug("Added space between sentences");
       }
       indexOfEndOfLastSentence = matcher.end();
@@ -54,7 +54,7 @@ public class ParagraphParser extends AbstractBaseParser {
     if (indexOfEndOfLastSentence < paragraph.length()) {
       String lineBreak = paragraph.substring(indexOfEndOfLastSentence);
       if (!lineBreak.isEmpty()) {
-        TextComponent lineBreakComponent = new SpaceSymbolLeaf(lineBreak.charAt(0));
+        TextComponent lineBreakComponent = new SymbolLeaf(TextComponentType.SPACE, lineBreak.charAt(0));
         paragraphComposite.add(lineBreakComponent);
         logger.debug("Added line break at the end of the paragraph");
       }

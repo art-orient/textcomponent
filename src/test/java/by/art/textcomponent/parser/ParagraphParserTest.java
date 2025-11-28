@@ -1,6 +1,6 @@
 package by.art.textcomponent.parser;
 
-import by.art.textcomponent.component.SpaceSymbolLeaf;
+import by.art.textcomponent.component.SymbolLeaf;
 import by.art.textcomponent.component.TextComponentType;
 import by.art.textcomponent.component.TextComposite;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,9 @@ class ParagraphParserTest {
     TextComposite result = parser.parseText("\tHello world.");
     assertAll(
             () -> assertEquals(TextComponentType.PARAGRAPH, result.getComponentType()),
-            () -> assertTrue(result.getChildrenComponents().get(0) instanceof SpaceSymbolLeaf),
+            () -> assertTrue(result.getChildrenComponents().get(0) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.SPACE,
+                    result.getChildrenComponents().get(0).getComponentType()),
             () -> assertEquals(2, result.getChildrenComponents().size())
     );
   }
@@ -38,7 +40,7 @@ class ParagraphParserTest {
     assertAll(
             () -> assertEquals(TextComponentType.PARAGRAPH, result.getComponentType()),
             () -> assertTrue(result.getChildrenComponents().subList(0, 4).stream()
-                    .allMatch(c -> c instanceof SpaceSymbolLeaf))
+                    .allMatch(c -> c instanceof SymbolLeaf))
     );
   }
 
@@ -48,7 +50,9 @@ class ParagraphParserTest {
     TextComposite result = parser.parseText("Hello world. Bye!");
     assertAll(
             () -> assertEquals(3, result.getChildrenComponents().size()),
-            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SpaceSymbolLeaf)
+            () -> assertTrue(result.getChildrenComponents().get(1) instanceof SymbolLeaf),
+            () -> assertEquals(TextComponentType.SPACE,
+                    result.getChildrenComponents().get(1).getComponentType())
     );
   }
 

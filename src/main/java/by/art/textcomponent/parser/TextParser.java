@@ -18,11 +18,9 @@ public class TextParser extends AbstractBaseParser {
   public TextComponent parseText(String text) {
     TextComposite textComposite = new TextComposite(TextComponentType.TEXT);
     String[] paragraphs = text.split(PARAGRAPH_REGEX);
-    for (String paragraph: paragraphs) {
-      if (!paragraph.isEmpty()) {
-        TextComponent component = getNextParser().parseText(paragraph);
-        textComposite.add(component);
-      }
+    for (String paragraph : paragraphs) {
+      TextComponent component = getNextParser().parseText(paragraph);
+      textComposite.add(component);
     }
     logger.info("{} paragraphs found", paragraphs.length);
     return textComposite;
